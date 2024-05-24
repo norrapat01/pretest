@@ -11,7 +11,6 @@ const Secret = () => {
       <Navbar />
       <Advertise />
       <ResponsiveContainer>
-        {/* <Detail /> */}
         <SidebarWithMenu />
       </ResponsiveContainer>
 
