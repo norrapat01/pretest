@@ -24,7 +24,7 @@ const ResponsiveContainer: React.FC<{ children: React.ReactNode }> = ({
               >
                 <Card className="border-0 h-auto d-flex justify-content-center px-4 py-5 pt-5">
                   <Row>
-                    <Col md={3}>
+                    <Col md={3} style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
                       <Sidebar />
                     </Col>
                     <Col md={9}>

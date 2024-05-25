@@ -1,52 +1,69 @@
-import React, { useState } from 'react';
-import { Card, Form, ListGroup } from 'react-bootstrap';
+import React, { useState } from "react";
+import {
+  FormCheck,
+  Button,
+  ListGroup,
+} from "react-bootstrap";
+
+interface Filter {
+  name: string;
+  options: string[];
+}
 
 const Sidebar: React.FC = () => {
-  const [selectedItems, setSelectedItems] = useState<string[]>([]);
+  const [filters, setFilters] = useState<Record<string, string[]>>({});
 
-  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    if (selectedItems.includes(value)) {
-      setSelectedItems(selectedItems.filter(item => item !== value));
-    } else {
-      setSelectedItems([...selectedItems, value]);
-    }
+  const handleFilterChange = (filterName: string, option: string) => {
+    const selectedOptions = filters[filterName] || [];
+    const isSelected = selectedOptions.includes(option);
+
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [filterName]: isSelected
+        ? selectedOptions.filter((v) => v !== option)
+        : [...selectedOptions, option],
+    }));
   };
 
+  const clearFilters = () => {
+    setFilters({});
+  };
+
+  const filterOptions: Filter[] = [
+    { name: "Categories", options: ["Whole Bean", "Ground Coffee", "K-Cups"] },
+    { name: "Roast", options: ["Blonde", "Medium", "Dark"] },
+    { name: "Caffeine", options: ["Decaf", "Regular"] },
+  ];
+
   return (
-    <Card style={{ width: '18rem' }}>
-      <Card.Header>Filter Options</Card.Header>
-      <ListGroup variant="flush">
-        <ListGroup.Item>
-          <Form.Check
-            type="checkbox"
-            label="Option 1"
-            value="option1"
-            checked={selectedItems.includes('option1')}
-            onChange={handleCheckboxChange}
-          />
-        </ListGroup.Item>
-        <ListGroup.Item>
-          <Form.Check
-            type="checkbox"
-            label="Option 2"
-            value="option2"
-            checked={selectedItems.includes('option2')}
-            onChange={handleCheckboxChange}
-          />
-        </ListGroup.Item>
-        <ListGroup.Item>
-          <Form.Check
-            type="checkbox"
-            label="Option 3"
-            value="option3"
-            checked={selectedItems.includes('option3')}
-            onChange={handleCheckboxChange}
-          />
-        </ListGroup.Item>
-        {/* เพิ่ม checkbox อื่นๆ ตามต้องการ */}
-      </ListGroup>
-    </Card>
+    <div style={{ width: "200px" }} className="sidebar">
+      <h3>Filters</h3>
+      <div className="filter-groups">
+        {filterOptions.map((filter, index) => (
+          <div key={index} className="filter-group">
+            <h4 style={{ textAlign: "left", margin: "0" }}>{filter.name}</h4>
+            <hr/>
+            <ListGroup variant="flush" >
+              {filter.options.map((option, idx) => (
+                <ListGroup.Item key={idx} className="no-border">
+                  <div className="checkbox-wrapper">
+                    <FormCheck
+                      type="checkbox"
+                      label={option}
+                      checked={filters[filter.name]?.includes(option)}
+                      onChange={() => handleFilterChange(filter.name, option)}
+                    />
+                  </div>
+                </ListGroup.Item>
+              ))}
+            </ListGroup>
+          </div>
+        ))}
+      </div>
+      <Button variant="secondary" onClick={clearFilters}>
+        Clear Filters
+      </Button>
+    </div>
   );
 };
 
