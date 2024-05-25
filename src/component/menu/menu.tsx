@@ -24,8 +24,9 @@ const Menu = () => {
   return (
     <>
       <SearchBar setResults={handleSearch} />
-      <SearchList results={searchResults} />
+
       <div className="container">
+        <SearchList results={searchResults} />
         <Row className="justify-content-center">
           {starbucksData.map((value) => (
             <Col md={4} key={value.id}>

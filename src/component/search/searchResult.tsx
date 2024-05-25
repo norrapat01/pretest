@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
+import style from "./SearchBar.module.css";
 interface SearchResultProps {
   result: string;
 }
@@ -17,7 +17,7 @@ const SearchResult: React.FC<SearchResultProps> = ({ result }) => {
   };
 
   return (
-    <div className="search-result" onClick={handleClick}>
+    <div className={style.results} onClick={handleClick}>
       {result}
     </div>
   );

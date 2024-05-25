@@ -1,16 +1,14 @@
-// SearchResultsList.tsx
-import React from "react"; // Correct import pat
+import React from "react";
 import SearchResult from "./searchResult";
 import { ISearchResultsListProps } from "src/interface/search";
+import style from "./SearchBar.module.css";
 
 const SearchResultsList: React.FC<ISearchResultsListProps> = ({ results }) => {
-
   if (results.length == 0) {
-    return (<>
-    </>);
+    return <></>;
   }
   return (
-    <div className="results-list overflow-auto">
+    <div className={style.resultsList}>
       {results.map((result, id) => (
         <SearchResult result={result.name} key={id} />
       ))}
