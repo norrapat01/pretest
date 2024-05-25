@@ -1,8 +1,9 @@
-// useStarbucksData.jsx
-import { useStarbucksService } from "src/service/starbuck";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-export const useStarbucksData = () => {
+import { Item } from "src/interface/interface";
+import { useStarbucksService } from "src/service/starbuck";
+
+export const useStarbucksData = (selectedOptions?: string[] ) => {
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
 
@@ -13,8 +14,9 @@ export const useStarbucksData = () => {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
-  const starbucksData = useStarbucksService();
-  
+
+  const starbucksData = useStarbucksService(selectedOptions);
+
   const itemsPerPage = 12;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -29,5 +31,3 @@ export const useStarbucksData = () => {
     handlePageChange,
   };
 };
-
-

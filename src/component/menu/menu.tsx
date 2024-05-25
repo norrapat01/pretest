@@ -1,12 +1,18 @@
 // Menu.jsx
-import React from "react";
+import React, { useState } from "react";
 import { Col, Row, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import PaginationComponent from "../pagination/pagination";
 import { useStarbucksData } from "./helper";
 
 const Menu = () => {
-  const { starbucksData, currentPage, totalPages, handleCardClick, handlePageChange } = useStarbucksData();
+  const {
+    starbucksData,
+    currentPage,
+    totalPages,
+    handleCardClick,
+    handlePageChange,
+  } = useStarbucksData();
 
   return (
     <div className="container">
