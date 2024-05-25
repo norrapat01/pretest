@@ -6,7 +6,9 @@ import Detail from "./menu/detail/detail";
 import Sidebar from "./side-bar/side-bar";
 import Menu from "./menu/menu";
 
-const ResponsiveContainer: React.FC <{ children: React.ReactNode }>= ({children}) => {
+const ResponsiveContainer: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   return (
     <>
       <Container fluid>
@@ -22,13 +24,15 @@ const ResponsiveContainer: React.FC <{ children: React.ReactNode }>= ({children}
               >
                 <Card className="border-0 h-auto d-flex justify-content-center px-4 py-5 pt-5">
                   <Row>
-                    <Col md={3}><Sidebar /></Col>
-                    <Col md={9}><Menu /></Col>
+                    <Col md={3}>
+                      <Sidebar />
+                    </Col>
+                    <Col md={9}>
+                      <Menu />
+                    </Col>
                   </Row>
                   <Row>
-                    <Col md={12}>
-                      {/* <Detail /> */}
-                    </Col>
+                    <Col md={12}>{/* <Detail /> */}</Col>
                   </Row>
                 </Card>
               </div>

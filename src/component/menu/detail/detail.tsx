@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Card, Col, Row } from "react-bootstrap";
+import { useLocation, useParams } from "react-router-dom";
 import { fetchStarbucksDataById } from "src/api/api.route";
 import { Item } from "src/interface/interface";
 
 const Detail: React.FC = () => {
+  const useQuery = () => {
+    return new URLSearchParams(useLocation().search);
+  };
+  const query = useQuery();
+  const id = query.get("id");
   const [starbucksData, setStarbucksData] = useState<Item | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetchStarbucksDataById(1);
+        const response = await fetchStarbucksDataById(Number(id));
         const data = response[0];
         setStarbucksData(data);
       } catch (error) {
@@ -37,7 +43,7 @@ const Detail: React.FC = () => {
                   height: "auto",
                   display: "flex",
                   justifyContent: "center",
-                  padding: "0 100px",
+                  padding: "50px 100px 0",
                 }}
               >
                 <Card.Body style={{ flex: 1 }}>
@@ -90,3 +96,6 @@ const Detail: React.FC = () => {
 };
 
 export default Detail;
+function useQuery() {
+  throw new Error("Function not implemented.");
+}
