@@ -23,7 +23,7 @@ export const fetchStarbucksDataById = async (id: Number) => {
   }
 };
 
-export const fetchStarbucksDataByName = async (name: String) => {
+export const fetchStarbucksDataByName = async (name?: string) => {
   try {
     const response = await axios.get(`${API_URL}?name=${name}`);
     return response.data;

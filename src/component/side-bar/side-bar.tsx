@@ -27,7 +27,7 @@ const Sidebar: React.FC = () => {
   const clearFilters = () => {
     setFilters({});
   };
-  const starbucksData = useStarbucksService(Object.values(filters).flat());
+  const starbucksData = useStarbucksService();
 
   const filterOptions: Filter[] = [
     {

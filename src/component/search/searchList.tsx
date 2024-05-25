@@ -1,18 +1,13 @@
 // SearchResultsList.tsx
 import React from "react"; // Correct import pat
 import SearchResult from "./searchResult";
+import { ISearchResultsListProps } from "src/interface/search";
 
-interface Result {
-  name: string;
-}
+const SearchResultsList: React.FC<ISearchResultsListProps> = ({ results }) => {
 
-interface SearchResultsListProps {
-  results: Result[];
-}
-
-const SearchResultsList: React.FC<SearchResultsListProps> = ({ results }) => {
   if (results.length == 0) {
-    return <div>No results found.</div>;
+    return (<>
+    </>);
   }
   return (
     <div className="results-list overflow-auto">

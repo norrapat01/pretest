@@ -1,22 +1,19 @@
 import { useEffect, useState } from "react";
 import {
   fetchStarbucksData,
+  fetchStarbucksDataByName,
   fetchStarbucksDataByOption,
 } from "src/api/api.route";
 import { Item } from "src/interface/interface";
 
-export const useStarbucksService = (selectedOptions?: string[]) => {
+export const useStarbucksService = () => {
   const [starbucksData, setStarbucksData] = useState<Item[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         let data;
-        if (selectedOptions && Object.keys(selectedOptions).length > 0) {
-          data = await fetchStarbucksDataByOption(selectedOptions);
-        } else {
-          data = await fetchStarbucksData();
-        }
+        data = await fetchStarbucksData();
         setStarbucksData(data);
       } catch (error) {
         console.error("Error fetching Starbucks data:", error);
@@ -25,6 +22,25 @@ export const useStarbucksService = (selectedOptions?: string[]) => {
 
     fetchData();
   }, []);
+
+  return starbucksData;
+};
+
+export const useStarbucksServiceByName = (name?: string) => {
+  const [starbucksData, setStarbucksData] = useState<Item[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await fetchStarbucksDataByName(name);
+        setStarbucksData(data);
+      } catch (error) {
+        console.error("Error fetching Starbucks data:", error);
+      }
+    };
+
+    fetchData();
+  }, [name]);
 
   return starbucksData;
 };

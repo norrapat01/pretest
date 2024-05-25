@@ -1,21 +1,34 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Item } from "src/interface/interface";
-import { useStarbucksService } from "src/service/starbuck";
+import { ISearchResultsListProps } from "src/interface/search";
+import {
+  useStarbucksService,
+  useStarbucksServiceByName,
+} from "src/service/starbuck";
 
-export const useStarbucksData = (selectedOptions?: string[] ) => {
+export const useStarbucksData = (
+  selectedOptions?: string[],
+  searchResults?: ISearchResultsListProps[],
+  input: string = ""
+) => {
+  console.log(searchResults);
   const [currentPage, setCurrentPage] = useState(1);
+
   const navigate = useNavigate();
 
   const handleCardClick = (id: number) => {
-    navigate(`/detail?id=${id}`);
+    navigate(`/detail?id=${encodeURIComponent(id)}`);
   };
 
+  const handleCard = (name: string) => {
+    navigate(`/detail?name=${encodeURIComponent(name)}`);
+  };
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 
-  const starbucksData = useStarbucksService(selectedOptions);
+  const starbucksData = useStarbucksService();
 
   const itemsPerPage = 12;
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -28,6 +41,7 @@ export const useStarbucksData = (selectedOptions?: string[] ) => {
     currentPage,
     totalPages,
     handleCardClick,
+    handleCard,
     handlePageChange,
   };
 };

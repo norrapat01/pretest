@@ -1,13 +1,19 @@
-// SearchResult.tsx (or SearchResult.ts)
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 interface SearchResultProps {
-  result: string; // Assuming result is of type string
+  result: string;
 }
 
-const SearchResult: React.FC<SearchResultProps> = ({ result }) => { 
+const SearchResult: React.FC<SearchResultProps> = ({ result }) => {
+  const navigate = useNavigate();
+
+  const handleCard = (name: string) => {
+    navigate(`/detail?name=${name}`);
+  };
+
   const handleClick = () => {
-    alert(`You selected ${result}!`);
+    handleCard(result);
   };
 
   return (

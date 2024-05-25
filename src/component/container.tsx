@@ -8,6 +8,8 @@ import Menu from "./menu/menu";
 import SearchBar from "./search/searchBar";
 import SearchResults from "./search/searchList";
 
+
+
 const ResponsiveContainer: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
@@ -16,6 +18,7 @@ const ResponsiveContainer: React.FC<{ children: React.ReactNode }> = ({
   const handleSearch = (results: any[]) => {
     setSearchResults(results);
   };
+
   
   return (
     <>
